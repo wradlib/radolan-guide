@@ -6,6 +6,12 @@
 import os
 import sys
 
+import pyproj
+
+# set PROJ_LIB explicitely to overcome RTD issue
+os.environ["PROJ_LIB"] = pyproj.datadir.get_data_dir()
+os.environ["PROJ_NETWORK"] = "ON"
+
 sys.path.insert(0, os.path.abspath(".."))
 
 project = "RADOLAN Guide"
