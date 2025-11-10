@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+.env/
+.venv/
+.ipynb_checkpoints/
+
+# MyST build outputs
+_build

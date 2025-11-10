@@ -1,0 +1,25 @@
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.13
+  - cartopy
+  - git
+  - gdal
+  - ipykernel
+  - jupytext
+  - linkify-it-py
+  - matplotlib-base
+  - myst-nb
+  - nbconvert
+  - notebook
+  - numpy
+  - pytest
+  - pytest-sugar
+  - pytest-xdist
+  - requests
+  - sphinx
+  - sphinx-copybutton
+  - sphinx-book-theme>=1.0
+  - wradlib >=2.4, <2.5
+  - xarray >=2024.10.0
