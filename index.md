@@ -9,13 +9,11 @@ kernelspec:
   display_name: Python 3
 ---
 
-```{include} _includes/license_block.md
-```
-
 ```{include} README.md
 ```
 
 ```{toctree}
+:caption: Concepts
 :hidden:
 :maxdepth: 4
 
@@ -23,5 +21,14 @@ notebooks/intro
 notebooks/grid
 notebooks/format
 notebooks/network
-notebooks/product
 ```
+
+```{toctree}
+:caption: Products
+:hidden:
+:maxdepth: 1
+
+notebooks/legacy
+notebooks/odim
+```
+

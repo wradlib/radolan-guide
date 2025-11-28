@@ -1,0 +1,34 @@
+/* target sphinx-book-theme dark theme and make xarray HTML reprs use theme colors */
+html[data-theme="dark"] div.cell_output .text_html:has(div.xr-wrap),
+body.theme-dark div.cell_output .text_html:has(div.xr-wrap) {
+  background-color: var(--color-content) !important;
+  color: var(--color-text) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* remove grey frame around matplotlib images in cell outputs (sphinx-book-theme) */
+html[data-theme="dark"] .cell_output img,
+body.theme-dark .cell_output img,
+html[data-theme="dark"] .cell_output .output_area img,
+body.theme-dark .cell_output .output_area img {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: block; /* avoid inline-gap showing background from ancestor */
+}
+
+/* In case images are wrapped by .sphinx-gallery or .rendered_html wrappers */
+html[data-theme="dark"] .cell_output .rendered_html img,
+body.theme-dark .cell_output .rendered_html img,
+html[data-theme="dark"] .sphinx-gallery img,
+body.theme-dark .sphinx-gallery img {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+

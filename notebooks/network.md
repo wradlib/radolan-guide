@@ -11,9 +11,6 @@ title: Network
 subtitle: The German weather radar network and its contribution to RADOLAN products.
 ---
 
-```{include} ../_includes/license_block.md
-```
-
 # Network
 
 In this chapter the RW-product is shown in WGS84 and the RADOLAN {ref}`Polar Stereographic Projection <grid-projection>`. All radars which are used for the compositing process are extracted from the metadata and plotted with their respective maximum range rings and location information.

@@ -11,17 +11,13 @@ title: Format
 subtitle: Structure and metadata of RADOLAN binary files and how to decode them.
 ---
 
-```{include} ../_includes/license_block.md
-```
-
 # Format
 
+RADOLAN was distributed in binary format for roughly 20 years now. In the last years, especially with the evolving [POLARA framework](https://www.dwd.de/DE/forschung/atmosphaerenbeob/wetterradar/wetterradar_node.html) HDF5 based products emerged. 
 
-## Binary format
+In August 2025 The Deutscher Wetterdienst [announced](https://www.dwd.de/DE/leistungen/opendata/neuigkeiten/opendata_august2025_1.html) the sunsetting of several products in the legacy binary format to be exchanged with new ODIM_H5 based products after November 30, 2025.
 
-The RADOLAN binary data file format is described in the [RADOLAN/RADVOR-OP Kompositformat](https://www.dwd.de/DE/leistungen/radolan/radolan_info/radolan_radvor_op_komposit_format_pdf.pdf?__blob=publicationFile) document. The radolan composite files consists of an ascii header containing all needed information to decode the following binary data block. $\omega radlib$ provides {func}`wradlib.io.read_radolan_composite` to read the data.
-
-The function {func}`wradlib.io.parse_dwd_composite_header` takes care of correctly decoding the ascii header. All available header information is transferred into the metadata dictionary.
+In the following sections all formats are described in great detail.
 
 ```{code-cell} python
 import io
@@ -33,7 +29,36 @@ warnings.filterwarnings("ignore")
 import matplotlib.pyplot as plt
 import numpy as np
 import wradlib as wrl
+import xarray as xr
 ```
+
+(odim-format)=
+## ODIM_H5 format
+
+ODIM_H5 was developed by the [EUMETNET Operational Programme for the Exchange of Weather Radar Information (OPERA)](https://eumetnet.eu/observations/weather-radar-network/). The [OPERA Data Information Model (ODIM) document](https://www.eumetnet.eu/wp-content/uploads/2021/07/ODIM_H5_v2.4.pdf) can be accessed from their website. 
+
+To get an insight of the inner HDF5 layout, we just open the file with {func}`xarray:xarray.open_datatree` and visualize the structure. You can inspect the different groups, datasets and attributes. 
+
+```{code-cell} python
+# load radolan files
+rw_filename = "../data/hdf5/raa01-rw_10000-latest-dwd---bin.hdf5"
+ds = xr.open_datatree(rw_filename)
+display(ds)
+```
+
+For this kind of RADOLAN data {{ wradlib }} implemented a transformation layer to read the data with the same reader as the binary and ASCII format data and present it in the same consistent {class}`xarray:xarray.Dataset`. This functionality is available starting with {{ wradlib }} version 2.6.0.
+
+```{code-cell} python
+ds = xr.open_dataset(rw_filename, engine="radolan")
+display(ds)
+ds.ACRR.plot()
+```
+
+## Binary format
+
+The RADOLAN binary data file format is described in the [RADOLAN/RADVOR-OP Kompositformat](https://www.dwd.de/DE/leistungen/radolan/radolan_info/radolan_radvor_op_komposit_format_pdf.pdf?__blob=publicationFile) document. The radolan composite files consists of an ascii header containing all needed information to decode the following binary data block. $\omega radlib$ provides {func}`wradlib.io.read_radolan_composite` to read the data.
+
+The function {func}`wradlib.io.parse_dwd_composite_header` takes care of correctly decoding the ascii header. All available header information is transferred into the metadata dictionary.
 
 ```{code-cell} python
 # load radolan files
@@ -54,10 +79,10 @@ In the following example, the header information of four different composites is
 
 ```{code-cell} python
 # load radolan file
-rx_filename = "../data/showcase/raa01-rx_10000-1408102050-dwd---bin.gz"
-ex_filename = "../data/showcase/raa01-ex_10000-1408102050-dwd---bin.gz"
-rw_filename = "../data/showcase/raa01-rw_10000-1408102050-dwd---bin.gz"
-sf_filename = "../data/showcase/raa01-sf_10000-1408102050-dwd---bin.gz"
+rx_filename = "../data/showcase/legacy/raa01-rx_10000-1408102050-dwd---bin.gz"
+ex_filename = "../data/showcase/legacy/raa01-ex_10000-1408102050-dwd---bin.gz"
+rw_filename = "../data/showcase/legacy/raa01-rw_10000-1408102050-dwd---bin.gz"
+sf_filename = "../data/showcase/legacy/raa01-sf_10000-1408102050-dwd---bin.gz"
 
 rxdata, rxattrs = wrl.io.read_radolan_composite(rx_filename)
 exdata, exattrs = wrl.io.read_radolan_composite(ex_filename)
@@ -115,7 +140,7 @@ The ASCII GIS Format is prepended by a limited header and has two flavours as fo
 ```
     Units: 0.1 mm
 
-Product and Datetime need to be extracted from the filename, so extra care has to be taken to not tamper with the filenames. Finally we exploit {func}`wradlib.io.open_radolan_mfdataset` to load the data into a consistent {class}`xarray.Dataset`.
+Product and Datetime need to be extracted from the filename, so extra care has to be taken to not tamper with the filenames. Finally, we exploit {func}`wradlib.io.open_radolan_mfdataset` to load the data into a consistent {class}`xarray.Dataset`.
 
 ```{code-cell} python
 fname = "../data/asc/RW-20221018.tar.gz"
