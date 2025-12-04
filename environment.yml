@@ -21,5 +21,5 @@ dependencies:
   - sphinx
   - sphinx-copybutton
   - sphinx-book-theme>=1.0
-  - wradlib >=2.4, <2.5
+  - wradlib >=2.6
   - xarray >=2024.10.0
