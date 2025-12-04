@@ -18,6 +18,7 @@ In this notebook an overview over several RADOLAN products in ODIM_H5 format is 
 ```{code-cell} python
 import io
 import os
+import gc
 import glob
 import tarfile
 import warnings
@@ -38,7 +39,7 @@ Define data reading function and plotting function.
 ```{code-cell} python
 def read_radolan(radfile):
     radfile = os.path.join("../data/showcase/odim", radfile)
-    return xr.open_dataset(radfile, engine="radolan")
+    return xr.open_dataset(radfile, engine="radolan").load()
 ```
 
 ```{code-cell} python
@@ -355,6 +356,8 @@ display(ds)
 
 ```{code-cell} python
 ds.DBZH.plot(col="prediction_time", col_wrap=5, vmin=0, vmax=60)
+del buffer
+gc.collect()
 ```
   
 ### RV Product
@@ -377,6 +380,8 @@ display(ds)
 
 ```{code-cell} python
 ds.ACRR.plot(col="prediction_time", col_wrap=5, vmin=0, vmax=2)
+del buffer
+gc.collect()
 ```
 
 ### RS Product
@@ -399,4 +404,6 @@ display(ds)
 
 ```{code-cell} python
 ds.ACRR.plot(col="prediction_time", col_wrap=5, vmin=0, vmax=10)
+del buffer
+gc.collect()
 ```
