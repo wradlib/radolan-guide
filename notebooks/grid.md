@@ -11,9 +11,6 @@ title: Grid
 subtitle: Understanding the spatial reference and projection of the RADOLAN composite grid.
 ---
 
-```{include} ../_includes/license_block.md
-```
-
 # Grid
 
 (grid-projection)=

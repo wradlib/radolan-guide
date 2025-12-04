@@ -8,12 +8,12 @@ The documentation and notebooks of the *RADOLAN Guide* are now available at http
 
 RADOLAN is abbreviated from the german **RA**dar-**O**n**L**ine-**AN**eichung, which means Radar-Online-Adjustment.
 
-Using it's [network of 17 weather radar](https://www.dwd.de/SharedDocs/broschueren/DE/presse/wetterradar_pdf.pdf?__blob=publicationFile&v=5) The Deutscher Wetterdienst provides [many products](https://www.dwd.de/DE/leistungen/radolan/produktuebersicht/radolan_produktuebersicht_pdf.pdf?__blob=publicationFile&v=6) for high resolution precipitation analysis and forecast. A comprehensive product list can be found in the [Product](notebooks/product) chapter .
+Using it's [network of 17 weather radar](https://www.dwd.de/SharedDocs/broschueren/DE/presse/wetterradar_pdf.pdf?__blob=publicationFile&v=5) The Deutscher Wetterdienst provides [many products](https://www.dwd.de/DE/leistungen/radolan/produktuebersicht/radolan_produktuebersicht_pdf.pdf?__blob=publicationFile&v=6) for high resolution precipitation analysis and forecast. A comprehensive product list can be found in the [Product-Legacy](notebooks/legacy) and [Product-ODIM](notebooks/odim) chapters.
 
-The formats of the composite products are described in the [Format](notebooks/format) chapter. They consist of a binary format with an ASCII header and an ASCII-only format. All composites are available in [Polar Stereographic Projection](notebooks/grid.md#projection) which will be discussed in the chapter [Grid](notebooks/grid).
+The different formats of the composite products are described in the [Format](notebooks/format) chapter. They consist of a binary format with an ASCII header, an ASCII-only format and the HDF5 based ``ODIM_H5`` format. All composites are available in [Polar Stereographic Projection](notebooks/grid.md#projection) which will be discussed in the chapter [Grid](notebooks/grid).
 
 This notebook tutorial was prepared with material from the [DWD RADOLAN/RADVOR-OP Kompositformat](https://www.dwd.de/DE/leistungen/radolan/radolan_info/radolan_radvor_op_komposit_format_pdf.pdf?__blob=publicationFile&v=5).
-Special thanks go to Elmar Weigl, The Deutscher Wetterdienst, for providing the extensive set of example data and his valuable information about the RADOLAN products.
+Special thanks go to Elmar Weigl and Matthias Gottschalk, The Deutscher Wetterdienst, for providing the extensive set of example data and their valuable information about the RADOLAN products.
 
 ## Installation
 

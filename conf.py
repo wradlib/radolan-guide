@@ -5,8 +5,11 @@
 
 import os
 import sys
+from importlib.metadata import version as metadata_version
 
 import pyproj
+from docutils import nodes
+from sphinx.transforms.post_transforms import SphinxPostTransform
 
 # set PROJ_LIB explicitely to overcome RTD issue
 os.environ["PROJ_LIB"] = pyproj.datadir.get_data_dir()
@@ -21,8 +24,6 @@ release = "1.0.0"
 html_title = " ".join([project, release])
 
 # get version from metadata
-from importlib.metadata import version as metadata_version
-
 wradlib_version = metadata_version("wradlib")
 
 extensions = [
@@ -83,6 +84,7 @@ intersphinx_mapping = {
 master_doc = "index"
 
 html_theme = "sphinx_book_theme"
+templates_path = ["_templates"]
 
 html_theme_options = {
     "show_navbar_depth": 4,
@@ -98,3 +100,52 @@ nb_execution_raise_on_error = False
 
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "**/.*"]
+
+html_static_path = ["_static"]
+html_css_files = ["darkmode.css", "ccby.css"]
+
+
+ccby_author = "RADOLAN — Deutscher Wetterdienst (DWD)"
+ccby_author_url = "https://www.dwd.de/DE/leistungen/radolan/radolan.html"
+
+
+class AddCCBYToImages(SphinxPostTransform):
+    """Attach a CCBY note to each created image
+    """
+    default_priority = 900  # after myst-nb rendering
+
+    def run(self):
+        for node in self.document.traverse(nodes.image):
+            parent = node.parent
+            if not isinstance(parent, nodes.container):
+                continue
+
+            classes = parent.get("classes", [])
+            if "cell_output" not in classes:
+                continue
+
+            # handle duplicates
+            if any(
+                isinstance(n, nodes.raw) and 'data-ccby="1"' in n.astext()
+                for n in parent.children
+            ):
+                continue
+
+            note = nodes.raw(
+                "",
+                (
+                    '<p class="ccby-note" data-ccby="1">'
+                    f'<strong>Data:</strong> <a href="{self.app.config.ccby_author_url}">'
+                    f"{self.app.config.ccby_author}</a>. "
+                    'Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.'
+                    "</p>"
+                ),
+                format="html",
+            )
+            parent += note
+
+
+def setup(app):
+    app.add_config_value("ccby_author", ccby_author, "html")
+    app.add_config_value("ccby_author_url", ccby_author_url, "html")
+    app.add_post_transform(AddCCBYToImages)

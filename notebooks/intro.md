@@ -11,9 +11,6 @@ title: Introduction
 subtitle: An overview of the RADOLAN system, its data products, and how to use this guide.
 ---
 
-```{include} ../_includes/license_block.md
-```
-
 # Intro
 
 This chapter shows simple loading and visualization of RADOLAN data.
@@ -80,7 +77,7 @@ plt.title("RADOLAN RW Product Polar Stereo \n" + rwattrs["datetime"].isoformat()
 plt.grid(color="r")
 ```
 
-A much more comprehensive section using several RADOLAN composites is shown in chapter {doc}`product`.
+A much more comprehensive section using several RADOLAN composites is shown in chapter {doc}`legacy` and {doc}`odim`.
 
 ## Xarray backend
 

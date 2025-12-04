@@ -1,0 +1,10 @@
+.ccby-note {
+    font-size: 0.65em;
+    margin: 0.35em 0 1.2em 0;
+    color: var(--pst-color-text-muted, #555);
+    line-height: 1.3;
+}
+
+.ccby-note a {
+    text-decoration: underline;
+}
