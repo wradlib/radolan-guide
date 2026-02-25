@@ -24,7 +24,6 @@ import numpy as np
 import xarray as xr
 from osgeo import osr
 import cartopy.crs as ccrs
-import pint_xarray
 ```
 
 ```{code-cell} ipython3
