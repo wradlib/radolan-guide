@@ -193,8 +193,8 @@ grid_corner(radolan_grid_de4800_wgs84_xy, radolan_grid_de4800_wgs84_ll)
 In the transition period from sphere model to wgs84 ellipsoid model DWD released both versions. In the following example ``WN`` product data is used to showcase this.
 
 ```{code-cell} ipython3
-SPHERE_FILE = "../data/grid/sphere/WN2204091200_000"
-WGS84_FILE = "../data/grid/wgs84/WN2204091200_000"
+SPHERE_FILE = "../data/grid/sphere/WN2204091200_000.gz"
+WGS84_FILE = "../data/grid/wgs84/WN2204091200_000.gz"
 ds_sphere = xr.open_dataset(SPHERE_FILE, engine="radolan").set_coords("crs")
 ds_wgs84 = xr.open_dataset(WGS84_FILE, engine="radolan").set_coords("crs")
 ```
