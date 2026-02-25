@@ -7,11 +7,15 @@ jupytext:
 kernelspec:
   name: python3
   display_name: Python 3
-title: Grid
+title: Grid - Sphere
 subtitle: Understanding the spatial reference and projection of the RADOLAN composite grid.
 ---
 
-# Grid
+# Grid - Sphere
+
+```{note}
+The following grid descriptions and examples assume that the RADOLAN data are based on the **original spherical Earth model**. All X/Y coordinates, formulas, and convenience functions refer to the sphere-based projection. For the newer WGS84-based products, the lon/lat coordinates remain comparable, but projected X/Y coordinates differ slightly due to the ellipsoidal Earth model. Users should reproject or transform these datasets if comparing sphere and WGS84 products.
+```
 
 (grid-projection)=
 ## Projection
