@@ -17,6 +17,7 @@ dependencies:
   - pytest
   - pytest-sugar
   - pytest-xdist
+  - rioxarray
   - requests
   - sphinx
   - sphinx-copybutton
