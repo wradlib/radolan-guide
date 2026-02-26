@@ -19,6 +19,7 @@ kernelspec:
 
 notebooks/intro
 notebooks/grid
+notebooks/grid2
 notebooks/format
 notebooks/network
 ```
